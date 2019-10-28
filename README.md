@@ -1,2 +1,2 @@
 # backend-lab
-Initial backand repository for labs.
+Initial backand repository for labs. Bartek Żyła
