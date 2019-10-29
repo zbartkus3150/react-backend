@@ -11,7 +11,9 @@ import pw.react.backend.reactbackend.model.User;
 import pw.react.backend.reactbackend.service.UserService;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserController {
@@ -54,17 +56,42 @@ public class UserController {
 		return ResponseEntity.ok(result);
 	}
 
+	@PutMapping("/user/{id}")
+	public ResponseEntity<User> updateUser(@PathVariable(value = "id") int id, @Valid @RequestBody User user) {
+		User userToUpdate = userService.findById(id);
+		if (userToUpdate == null) {
+			throw new UserNotFoundException("Id: " + id);
+		}
+		userToUpdate.setAll(user.getLogin(), user.getFirstName(), user.getLastName(), user.getDateOfBirth(),
+				user.isActive());
+		final User updatedUser = userService.save(userToUpdate);
+		return ResponseEntity.ok(updatedUser);
+	}
+
+	@DeleteMapping("/user/{id}")
+	public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable(value = "id") int id) {
+		User userToDelete = userService.findById(id);
+		if (userToDelete == null) {
+			throw new UserNotFoundException("Id: " + id);
+		}
+		userService.delete(userToDelete);
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("deleted", Boolean.TRUE);
+
+		return ResponseEntity.ok(response);
+	}
+
 	@ExceptionHandler({UserAlreadyExistsException.class})
 	public ResponseEntity<ErrorResponse> alreadyExists(UserAlreadyExistsException ex) {
 		return new ResponseEntity<>(
-				new ErrorResponse("The user already exists in database"),
-				HttpStatus.NOT_FOUND);
+				new ErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST.value()),
+				HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler({UserNotFoundException.class})
 	public ResponseEntity<ErrorResponse> notFound(UserNotFoundException ex) {
 		return new ResponseEntity<>(
-				new ErrorResponse("The user does not exist in database"),
+				new ErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND.value(), "The user was not found"),
 				HttpStatus.NOT_FOUND);
 	}
 }

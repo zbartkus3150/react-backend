@@ -42,6 +42,14 @@ public class User implements Serializable {
 		this.isActive=isActive;
 	}
 
+	public void setAll(String login, String firstName, String lastName, Date dateOfBirth, boolean isActive) {
+		setLogin(login);
+		setFirstName(firstName);
+		setLastName(lastName);
+		setDateOfBirth(dateOfBirth);
+		setIsActive(isActive);
+	}
+
 	public int getId() {
 		return this.id;
 	}
