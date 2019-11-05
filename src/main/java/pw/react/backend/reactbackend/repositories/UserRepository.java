@@ -1,8 +1,8 @@
-package pw.react.backend.reactbackend.repository;
+package pw.react.backend.reactbackend.repositories;
 
 import java.util.List;
 
-import pw.react.backend.reactbackend.model.User;
+import pw.react.backend.reactbackend.models.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

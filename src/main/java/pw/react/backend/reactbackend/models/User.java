@@ -1,9 +1,9 @@
-package pw.react.backend.reactbackend.model;
+package pw.react.backend.reactbackend.models;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.*;
 
@@ -27,14 +27,12 @@ public class User implements Serializable {
 	private String lastName;
 
 	@Column(name = "date_of_birth")
-	private Date dateOfBirth;
+	private LocalDate dateOfBirth;
 
 	@Column(name = "is_active", nullable = false)
 	private boolean isActive;
 
-	public User() {}
-
-	public User(String login, String firstName, String lastName, Date dateOfBirth, boolean isActive) {
+	public User(String login, String firstName, String lastName, LocalDate dateOfBirth, boolean isActive) {
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.login=login;
@@ -42,13 +40,15 @@ public class User implements Serializable {
 		this.isActive=isActive;
 	}
 
-	public void setAll(String login, String firstName, String lastName, Date dateOfBirth, boolean isActive) {
+	public void setAll(String login, String firstName, String lastName, LocalDate LocalDateOfBirth, boolean isActive) {
 		setLogin(login);
 		setFirstName(firstName);
 		setLastName(lastName);
-		setDateOfBirth(dateOfBirth);
+		setDateOfBirth(LocalDateOfBirth);
 		setIsActive(isActive);
 	}
+
+	public User() {}
 
 	public int getId() {
 		return this.id;
@@ -82,12 +82,12 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public Date getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return this.dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setDateOfBirth(LocalDate DateOfBirth) {
+		this.dateOfBirth = DateOfBirth;
 	}
 
 	public boolean isActive() {
@@ -100,6 +100,6 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.format("Customer[id=%d, login='%s', firstName='%s', lastName='%s', is_active=%B, date_of_birth=%s]", id, login,firstName, lastName, isActive, dateOfBirth.toString());
+		return String.format("Customer[id=%d, login='%s', firstName='%s', lastName='%s', is_active=%B, Date_of_birth=%s]", id, login,firstName, lastName, isActive, dateOfBirth.toString());
 	}
 }

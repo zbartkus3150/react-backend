@@ -19,7 +19,6 @@ public class ErrorResponse {
         this("", code, "");
     }
 
-
     public String getMessage() {
         return message;
     }
