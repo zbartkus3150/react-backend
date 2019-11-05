@@ -38,7 +38,7 @@ public class UserService {
 
     public User create(User userToCreate) {
         List<User> user = userRepository.findByLogin(userToCreate.getLogin());
-        if (user != null)
+        if (user != null  && !user.isEmpty())
             throw new UserAlreadyExistsException("Login: " + userToCreate.getLogin());
         return userRepository.save(userToCreate);
     }

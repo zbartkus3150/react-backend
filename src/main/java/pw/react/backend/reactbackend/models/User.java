@@ -40,6 +40,15 @@ public class User implements Serializable {
 		this.isActive=isActive;
 	}
 
+	public void setAll(int id, String login, String firstName, String lastName, LocalDate LocalDateOfBirth, boolean isActive) {
+		setId(id);
+		setLogin(login);
+		setFirstName(firstName);
+		setLastName(lastName);
+		setDateOfBirth(LocalDateOfBirth);
+		setIsActive(isActive);
+	}
+
 	public void setAll(String login, String firstName, String lastName, LocalDate LocalDateOfBirth, boolean isActive) {
 		setLogin(login);
 		setFirstName(firstName);
@@ -100,6 +109,12 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.format("Customer[id=%d, login='%s', firstName='%s', lastName='%s', is_active=%B, Date_of_birth=%s]", id, login,firstName, lastName, isActive, dateOfBirth.toString());
+		return "{"+
+				"\"login\":"+"\"marti3\","+
+				"\"firstName\":"+"\"marti3\","+
+				"\"lastName\":"+"\"marti3\","+
+				"\"dateOfBirth\":"+"\"1998-01-01\","+
+				"\"active\":"+"false"+
+				"}";
 	}
 }

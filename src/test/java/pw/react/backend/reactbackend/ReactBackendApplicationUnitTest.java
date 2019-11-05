@@ -34,7 +34,7 @@ import static org.mockito.internal.verification.VerificationModeFactory.times;
 @SpringBootTest
 @ActiveProfiles("dev")
 @RunWith(MockitoJUnitRunner.class)
-public class ReactBackendApplicationTest {
+public class ReactBackendApplicationUnitTest {
     private static User[] users = {
             new User("login123", "Pawel", "Kowalski", LocalDate.of(2015, 12, 31), true),
             new User("login124", "Gawel", "Nowak", LocalDate.of(2013, 12, 31), false),
